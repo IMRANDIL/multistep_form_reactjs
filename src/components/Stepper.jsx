@@ -1,36 +1,78 @@
-import React from 'react'
-
-
-const displaySteps = (
-    <div className='w-full flex items-center'>
-
-
-        <div className='relative flex flex-col items-center text-teal-600'>
-            <div className='rounded-full transition duration-500 ease-in-out border-2 border-gray-300 h-12 w-12 flex items-center justify-center py-3'> {/* display number */}1</div>
+import React, { useEffect, useState, useRef } from 'react'
 
 
 
-            <div className='absolute top-0 text-center mt-16 w-32 text-xs font-medium uppercase'> {/* display description */}Description</div>
+
+
+
+const Stepper = ({ steps, currentStep }) => {
+
+
+    const [newStep, setNewStep] = useState([])
+
+
+
+    useEffect(() => {
+
+        //create object...
+
+        const stepsState = steps.map((step, i) =>
+
+            Object.assign({}, {
+                description: step,
+                completed: false,
+                highlighted: i === 0 ? true : false,
+                selected: i === 0 ? true : false
+            })
+
+        )
+
+
+
+    }, [steps, currentStep])
+
+
+
+
+
+
+
+    const displaySteps = (
+        <div className='w-full flex items-center'>
+
+
+            <div className='relative flex flex-col items-center text-teal-600'>
+                <div className='rounded-full transition duration-500 ease-in-out border-2 border-gray-300 h-12 w-12 flex items-center justify-center py-3'> {/* display number */}1</div>
+
+
+
+                <div className='absolute top-0 text-center mt-16 w-32 text-xs font-medium uppercase'> {/* display description */}Description</div>
+
+            </div>
+
+
+
+
+            <div className='flex-auto border-t-2 transition duration-500 ease-in-out '>
+                {/* display line */}
+            </div>
+
+
 
         </div>
 
 
-
-
-        <div className='flex-auto border-t-2 transition duration-500 ease-in-out '>
-            {/* display line */}
-        </div>
+    )
 
 
 
-    </div>
-
-
-)
 
 
 
-const Stepper = () => {
+
+
+
+
     return (
         <div className='mx-4 p-4 flex justify-between items-center'>
             {displaySteps}
