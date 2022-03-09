@@ -8,7 +8,19 @@ import React, { useEffect, useState, useRef } from 'react'
 const Stepper = ({ steps, currentStep }) => {
 
 
-    const [newStep, setNewStep] = useState([])
+    const [newStep, setNewStep] = useState([]);
+
+
+    const stepRef = useRef()
+
+
+    const updateStep = (stepNumber, steps) => {
+
+    }
+
+
+
+
 
 
 
@@ -28,6 +40,10 @@ const Stepper = ({ steps, currentStep }) => {
         )
 
 
+        stepRef.current = stepsState;
+        const current = updateStep(currentStep - 1, stepRef.current)
+
+        setNewStep(current)
 
     }, [steps, currentStep])
 
@@ -37,32 +53,34 @@ const Stepper = ({ steps, currentStep }) => {
 
 
 
-    const displaySteps = (
-        <div className='w-full flex items-center'>
+    const displaySteps = newStep.map((step, i) => {
+        return (
+            <div className='w-full flex items-center'>
 
 
-            <div className='relative flex flex-col items-center text-teal-600'>
-                <div className='rounded-full transition duration-500 ease-in-out border-2 border-gray-300 h-12 w-12 flex items-center justify-center py-3'> {/* display number */}1</div>
+                <div className='relative flex flex-col items-center text-teal-600'>
+                    <div className='rounded-full transition duration-500 ease-in-out border-2 border-gray-300 h-12 w-12 flex items-center justify-center py-3'> {/* display number */}1</div>
 
 
 
-                <div className='absolute top-0 text-center mt-16 w-32 text-xs font-medium uppercase'> {/* display description */}Description</div>
+                    <div className='absolute top-0 text-center mt-16 w-32 text-xs font-medium uppercase'> {/* display description */}Description</div>
+
+                </div>
+
+
+
+
+                <div className='flex-auto border-t-2 transition duration-500 ease-in-out '>
+                    {/* display line */}
+                </div>
+
+
 
             </div>
 
 
-
-
-            <div className='flex-auto border-t-2 transition duration-500 ease-in-out '>
-                {/* display line */}
-            </div>
-
-
-
-        </div>
-
-
-    )
+        )
+    })
 
 
 
